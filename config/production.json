@@ -1,0 +1,5 @@
+{
+    "url":"e_commerce.com",
+    "mysql":"mysql://root:123@",
+    "port":"3002"
+}

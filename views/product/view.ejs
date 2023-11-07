@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../component/header",{data:{title:"Product list"}})%>
+</head>
+
+<body>
+    <%- include('../component/menu')%>
+    <div class="container">
+        <div class="row pt-5">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(typeof(error)!="undefined" || (product && product.length<=0)){%>
+                        <tr>
+                            <td>product not found</td>
+                        </tr>
+                        <%} else {%>
+            
+                            <% for (let rows of product){%>
+                                <tr>
+                                    <td>
+                                        <%= rows.id%>
+                                    </td>
+                                    <td>
+                                        <%= rows.name %>
+                                    </td>
+                                    <td>
+                                        <%= rows.price %>
+                                    </td>
+                                    <td>
+                                        <%= rows.description %>
+                                    </td>
+                                    <td>
+                                        <a href="/product/<%= rows.id%>" class="btn btn-primary">View</a>
+                                        <a href="/product/update<%= rows.id%>" class="btn btn-primary">Update</a>
+                                        <a href="/product/delete<%= rows.id%>" class="btn btn-primary">Delete</a>
+                                    </td>
+            
+                                </tr>
+                                <% }%>
+                                    <% }%>
+                </tbody>
+            </table>
+            <div class="col-sm-12"> 
+                <% let totalPage=Math.ceil(total/limit); %>
+                <% for (let i=1; i<=totalPage; i++){%>
+                    <% let url=`product?limit=${limit}&&page=${i}`%>
+                        <a href=<%=url%> class="btn btn-primary"><%= i %></a>
+                        <% } %>
+            </div>
+        </div>
+    </div>
+    <%- include("../component/footer") %>
+</body>
+</html>
